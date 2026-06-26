@@ -255,13 +255,13 @@
       var woltUrl = barcode ? woltUrls[barcode] : null;
 
       var woltHtml = woltUrl
-        ? '<a href="' + woltUrl + '" target="_blank" rel="noopener"><img src="wolt.svg" alt="Wolt" class="delivery-icon"></a>'
-        : '<img src="wolt.svg" alt="Wolt" class="delivery-icon" style="visibility:hidden">';
+        ? '<a href="' + woltUrl + '" target="_blank" rel="noopener"><img src="assets/img/icons/wolt.svg" alt="Wolt" class="delivery-icon"></a>'
+        : '<img src="assets/img/icons/wolt.svg" alt="Wolt" class="delivery-icon" style="visibility:hidden">';
 
       var icons = document.createElement('div');
       icons.className = 'delivery-icons';
       icons.innerHTML =
-        '<a href="' + (glovoUrl || '#') + '" target="_blank" rel="noopener"><img src="glovo.svg" alt="Glovo" class="delivery-icon"></a>' +
+        '<a href="' + (glovoUrl || '#') + '" target="_blank" rel="noopener"><img src="assets/img/icons/glovo.svg" alt="Glovo" class="delivery-icon"></a>' +
         woltHtml;
       card.appendChild(icons);
     });
