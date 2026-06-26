@@ -4348,13 +4348,9 @@ ul, ol {
 }
 
 .product-name-price {
-  grid-column-gap: var(--_space---space--space-s);
-  grid-row-gap: var(--_space---space--space-s);
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-top: 6px;
   display: flex;
+  flex-direction: column;
 }
 
 .products-inner {
@@ -4437,12 +4433,6 @@ ul, ol {
   line-height: 1.35;
 }
 
-.product-name-price .heading-07 {
-  flex-shrink: 0;
-  white-space: nowrap;
-  font-size: 15px;
-  line-height: 1.35;
-}
 
 .wine-slider-btn {
   z-index: 4;
@@ -6970,15 +6960,9 @@ ul, ol {
 }
 
 .products-page .product-name-price {
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: baseline;
-  gap: 0 5px;
+  align-items: flex-start;
 }
 
-.products-page .heading-07 {
-  white-space: nowrap;
-}
 
 .products-page .add-to-card-02 {
   color: var(--white-colour);
