@@ -6927,6 +6927,10 @@ ul, ol {
   display: flex;
 }
 
+.products-hero .navigation {
+  color: #ffffffb3;
+}
+
 .products-hero-copy {
   grid-column-gap: var(--_space---space--space-m);
   grid-row-gap: var(--_space---space--space-m);
