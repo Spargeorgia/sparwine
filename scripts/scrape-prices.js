@@ -15,6 +15,9 @@ const PRODUCTS = [
   { barcode: '9100300001170', productId: '4611686018630962578', externalId: '2273791', name: 'Il Barone Rose Wine' },
 ];
 
+// Section content API catches products that the product view API returns 404 for
+// (different SPAR branch assortments). We try section IDs that we know contain our wines.
+const SECTION_IDS = ['56850095', '46100021'];
 const STORE_ID = 26609;
 const ADDRESS_ID = 704713;
 
@@ -30,26 +33,23 @@ function alreadyUpdatedToday(data) {
   if (!data.updatedAt) return false;
   const today = new Date().toISOString().slice(0, 10);
   if (data.updatedAt.slice(0, 10) !== today) return false;
-  // Only skip if all products already have a price
   return PRODUCTS.every(p => data.prices[p.barcode]);
 }
 
-async function scrapePrice(context, product) {
+// Method 1: product view page navigation + API intercept
+async function scrapeViaProductPage(context, product) {
   const page = await context.newPage();
   let price = null;
 
   await new Promise(async (resolve) => {
     let done = false;
-
     const finish = async () => {
       if (done) return;
       done = true;
       await page.close().catch(() => {});
       resolve();
     };
-
     const timer = setTimeout(finish, 20000);
-
     page.on('response', async (response) => {
       if (done) return;
       if (!response.url().includes(`/products/${product.productId}/view`)) return;
@@ -66,7 +66,6 @@ async function scrapePrice(context, product) {
       clearTimeout(timer);
       finish();
     });
-
     await page.goto(
       `https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?productId=${product.productId}&externalProductId=${product.externalId}`,
       { waitUntil: 'domcontentloaded', timeout: 15000 }
@@ -74,6 +73,64 @@ async function scrapePrice(context, product) {
   });
 
   return price;
+}
+
+// Method 2: section content API — catches products missing from product view
+async function scrapeMissingViaSection(context, missingProducts) {
+  if (missingProducts.length === 0) return {};
+  const found = {};
+  const externalIdMap = {};
+  missingProducts.forEach(p => { externalIdMap[p.externalId] = p.barcode; });
+
+  const page = await context.newPage();
+
+  await new Promise(async (resolve) => {
+    let done = false;
+    const finish = async () => {
+      if (done) return;
+      done = true;
+      await page.close().catch(() => {});
+      resolve();
+    };
+    setTimeout(finish, 25000);
+
+    page.on('response', async (response) => {
+      if (done) return;
+      const url = response.url();
+      if (!url.includes('api.glovoapp.com')) return;
+      try {
+        const ct = response.headers()['content-type'] || '';
+        if (!ct.includes('json')) return;
+        const text = await response.text();
+        for (const [extId, barcode] of Object.entries(externalIdMap)) {
+          if (found[barcode]) continue;
+          if (!text.includes(`"${extId}"`)) continue;
+          const idx = text.indexOf(`"${extId}"`);
+          const snippet = text.slice(Math.max(0, idx - 400), idx + 600);
+          // Prefer discounted price (promotion) if present, otherwise regular
+          const allPrices = [...snippet.matchAll(/"displayText"\s*:\s*"([\d,]+₾)"/g)].map(m => m[1]);
+          if (allPrices.length > 0) {
+            found[barcode] = allPrices[0];
+          }
+        }
+        if (Object.keys(found).length === missingProducts.length) finish();
+      } catch {}
+    });
+
+    // Navigate to the foreign wine section page
+    await page.goto(
+      'https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095',
+      { waitUntil: 'domcontentloaded', timeout: 15000 }
+    ).catch(() => {});
+
+    // Scroll to trigger lazy loading
+    for (let i = 1; i <= 8; i++) {
+      await page.evaluate((n) => window.scrollTo(0, n * 800), i).catch(() => {});
+      await new Promise(r => setTimeout(r, 800));
+    }
+  });
+
+  return found;
 }
 
 (async () => {
@@ -94,24 +151,41 @@ async function scrapePrice(context, product) {
 
   const prices = { ...existing.prices };
   let updated = 0;
-  let failed = 0;
+  const failedProducts = [];
 
+  // Pass 1: try product view page for each product
   for (const product of PRODUCTS) {
     process.stdout.write(`  ${product.name}... `);
-    const price = await scrapePrice(context, product);
-
+    const price = await scrapeViaProductPage(context, product);
     if (price) {
       prices[product.barcode] = price;
       updated++;
       console.log(`✓ ${price}`);
     } else {
-      failed++;
-      console.log(`✗ failed (keeping: ${prices[product.barcode] || 'none'})`);
+      failedProducts.push(product);
+      console.log(`✗ (will retry via section)`);
+    }
+  }
+
+  // Pass 2: section page for products that failed
+  if (failedProducts.length > 0) {
+    console.log(`\nRetrying ${failedProducts.length} products via section page...`);
+    const sectionPrices = await scrapeMissingViaSection(context, failedProducts);
+    for (const product of failedProducts) {
+      const price = sectionPrices[product.barcode];
+      if (price) {
+        prices[product.barcode] = price;
+        updated++;
+        console.log(`  ✓ ${product.name}: ${price}`);
+      } else {
+        console.log(`  ✗ ${product.name}: failed (keeping: ${prices[product.barcode] || 'none'})`);
+      }
     }
   }
 
   await browser.close();
 
+  const failed = PRODUCTS.length - updated;
   const output = {
     prices,
     updatedAt: new Date().toISOString(),
@@ -120,12 +194,10 @@ async function scrapePrice(context, product) {
 
   fs.mkdirSync(path.dirname(PRICES_FILE), { recursive: true });
   fs.writeFileSync(PRICES_FILE, JSON.stringify(output, null, 2));
-
   console.log(`\nDone: ${updated}/${PRODUCTS.length} updated, ${failed} failed.`);
-  console.log(`Saved to ${PRICES_FILE}`);
 
-  if (failed === PRODUCTS.length) {
-    console.error('All prices failed — marking as failed for retry.');
+  if (updated === 0) {
+    console.error('All prices failed — marking for retry.');
     process.exit(1);
   }
 })();
