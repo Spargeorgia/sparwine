@@ -119,7 +119,7 @@ async function scrapeMissingViaSection(context, missingProducts) {
 
     // Navigate to the foreign wine section page
     await page.goto(
-      'https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095',
+      'https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-da-tsqriala-ghvino-c.56920023&section=utskhouri-ghvino-eqs-s.56920022',
       { waitUntil: 'domcontentloaded', timeout: 15000 }
     ).catch(() => {});
 
