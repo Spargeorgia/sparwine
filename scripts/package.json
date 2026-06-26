@@ -1,0 +1,11 @@
+{
+  "name": "sparwine-price-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "scrape": "node scrape-prices.js"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

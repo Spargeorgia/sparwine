@@ -266,6 +266,31 @@
       card.appendChild(icons);
     });
   </script>
+  <script>
+    fetch('data/prices.json?v=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var prices = data.prices || {};
+        document.querySelectorAll('.product-card-bottom').forEach(function(bottom) {
+          var label = bottom.querySelector('.p-02.caps');
+          if (!label) return;
+          var match = label.textContent.match(/(\d{10,13})/);
+          if (!match) return;
+          var barcode = match[1];
+          var price = prices[barcode];
+          if (!price) return;
+          var namePrice = bottom.querySelector('.product-name-price');
+          if (!namePrice) return;
+          var existing = namePrice.querySelector('.wine-glovo-price');
+          if (existing) { existing.textContent = price; return; }
+          var el = document.createElement('div');
+          el.className = 'wine-glovo-price';
+          el.textContent = price;
+          namePrice.appendChild(el);
+        });
+      })
+      .catch(function() {});
+  </script>
 </body>
 </html>
 

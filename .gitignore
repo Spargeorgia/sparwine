@@ -11,5 +11,8 @@
 # Archives
 *.zip
 
+# Dependencies
+scripts/node_modules/
+
 # Claude
 .claude/
