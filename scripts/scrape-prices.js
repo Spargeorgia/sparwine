@@ -29,7 +29,9 @@ function loadExisting() {
 function alreadyUpdatedToday(data) {
   if (!data.updatedAt) return false;
   const today = new Date().toISOString().slice(0, 10);
-  return data.updatedAt.slice(0, 10) === today;
+  if (data.updatedAt.slice(0, 10) !== today) return false;
+  // Only skip if all products already have a price
+  return PRODUCTS.every(p => data.prices[p.barcode]);
 }
 
 async function scrapePrice(context, product) {
