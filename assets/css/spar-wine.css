@@ -6914,7 +6914,7 @@ ul, ol {
   padding-top: 160px;
   padding-bottom: var(--_space---space--space-9xl);
   color: var(--white-colour);
-  background-image: linear-gradient(#07180899, #071808b3), url("../img/wine banner.png");
+  background-image: url("../img/banner.png");
   background-position: center;
   background-size: cover;
 }
