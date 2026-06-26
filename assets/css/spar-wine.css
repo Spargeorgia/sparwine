@@ -6936,8 +6936,13 @@ ul, ol {
 }
 
 .products-hero-right {
-  max-width: 360px;
-  color: #ffffffe6;
+  width: 50%;
+  min-height: 500px;
+  background-image: url("../img/wine banner.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
 }
 
 .products-page .product-tab-link-02 {
