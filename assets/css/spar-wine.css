@@ -4304,10 +4304,25 @@ ul, ol {
 }
 
 .wine-glovo-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-basis: 100%;
+  margin-top: 6px;
+}
+
+.wine-price-current {
   font-size: 16px;
   font-weight: 600;
   color: #2d170f;
-  margin-top: 4px;
+  letter-spacing: 0.01em;
+}
+
+.wine-price-original {
+  font-size: 14px;
+  font-weight: 400;
+  color: #999;
+  text-decoration: line-through;
   letter-spacing: 0.01em;
 }
 
@@ -4420,7 +4435,6 @@ ul, ol {
 .wine-product-title {
   font-size: 15px;
   line-height: 1.35;
-  min-height: 2.5em;
 }
 
 .product-name-price .heading-07 {
@@ -6956,7 +6970,10 @@ ul, ol {
 }
 
 .products-page .product-name-price {
-  align-items: flex-start;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 0 5px;
 }
 
 .products-page .heading-07 {

@@ -21,6 +21,20 @@ const SECTION_IDS = ['56850095', '46100021'];
 const STORE_ID = 26609;
 const ADDRESS_ID = 704713;
 
+// Recursively find all product tile items in a Glovo API response
+function extractItems(obj, results = []) {
+  if (!obj || typeof obj !== 'object') return results;
+  if (Array.isArray(obj)) {
+    for (const item of obj) extractItems(item, results);
+  } else {
+    if (obj.externalId && obj.priceInfo) {
+      results.push(obj);
+    }
+    for (const val of Object.values(obj)) extractItems(val, results);
+  }
+  return results;
+}
+
 function loadExisting() {
   try {
     return JSON.parse(fs.readFileSync(PRICES_FILE, 'utf8'));
@@ -33,7 +47,10 @@ function alreadyUpdatedToday(data) {
   if (!data.updatedAt) return false;
   const today = new Date().toISOString().slice(0, 10);
   if (data.updatedAt.slice(0, 10) !== today) return false;
-  return PRODUCTS.every(p => data.prices[p.barcode]);
+  return PRODUCTS.every(p => {
+    const entry = data.prices[p.barcode];
+    return entry && (typeof entry === 'object' ? entry.current : entry);
+  });
 }
 
 // Method 1: product view page navigation + API intercept
@@ -56,11 +73,17 @@ async function scrapeViaProductPage(context, product) {
       try {
         const json = await response.json();
         const elements = json?.data?.body?.data?.elements || [];
+        let currentPrice = null, originalPrice = null;
         for (const el of elements) {
-          if (el.type === 'TEXT' && el.data?.styles?.type === 'PRIMARY_BOLD_18') {
-            price = el.data.text;
-            break;
+          if (el.type === 'TEXT') {
+            const style = el.data?.styles?.type;
+            if (style === 'PRIMARY_BOLD_18') currentPrice = el.data.text;
+            // Strikethrough style indicates original price before discount
+            if (style === 'STRIKETHROUGH_14' || style === 'SECONDARY_STRIKE_14') originalPrice = el.data.text;
           }
+        }
+        if (currentPrice) {
+          price = originalPrice ? { current: currentPrice, original: originalPrice } : { current: currentPrice };
         }
       } catch {}
       clearTimeout(timer);
@@ -101,16 +124,19 @@ async function scrapeMissingViaSection(context, missingProducts) {
       try {
         const ct = response.headers()['content-type'] || '';
         if (!ct.includes('json')) return;
-        const text = await response.text();
-        for (const [extId, barcode] of Object.entries(externalIdMap)) {
-          if (found[barcode]) continue;
-          if (!text.includes(`"${extId}"`)) continue;
-          const idx = text.indexOf(`"${extId}"`);
-          const snippet = text.slice(Math.max(0, idx - 400), idx + 600);
-          // Prefer discounted price (promotion) if present, otherwise regular
-          const allPrices = [...snippet.matchAll(/"displayText"\s*:\s*"([\d,]+₾)"/g)].map(m => m[1]);
-          if (allPrices.length > 0) {
-            found[barcode] = allPrices[0];
+        let json;
+        try { json = await response.json(); } catch { return; }
+        const items = extractItems(json);
+        for (const item of items) {
+          const extId = item.externalId;
+          const barcode = externalIdMap[extId];
+          if (!barcode || found[barcode]) continue;
+          const regularPrice = item.priceInfo && item.priceInfo.displayText;
+          const promoPrice = item.promotion && item.promotion.priceInfo && item.promotion.priceInfo.displayText;
+          if (promoPrice && regularPrice) {
+            found[barcode] = { current: promoPrice, original: regularPrice };
+          } else if (regularPrice) {
+            found[barcode] = { current: regularPrice };
           }
         }
         if (Object.keys(found).length === missingProducts.length) finish();
@@ -160,7 +186,10 @@ async function scrapeMissingViaSection(context, missingProducts) {
     if (price) {
       prices[product.barcode] = price;
       updated++;
-      console.log(`✓ ${price}`);
+      const label = typeof price === 'object'
+        ? (price.original ? `${price.current} (was ${price.original})` : price.current)
+        : price;
+      console.log(`✓ ${label}`);
     } else {
       failedProducts.push(product);
       console.log(`✗ (will retry via section)`);
@@ -176,7 +205,10 @@ async function scrapeMissingViaSection(context, missingProducts) {
       if (price) {
         prices[product.barcode] = price;
         updated++;
-        console.log(`  ✓ ${product.name}: ${price}`);
+        const label = typeof price === 'object'
+          ? (price.original ? `${price.current} (was ${price.original})` : price.current)
+          : price;
+        console.log(`  ✓ ${product.name}: ${label}`);
       } else {
         console.log(`  ✗ ${product.name}: failed (keeping: ${prices[product.barcode] || 'none'})`);
       }

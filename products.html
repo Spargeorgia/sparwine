@@ -277,16 +277,19 @@
           var match = label.textContent.match(/(\d{10,13})/);
           if (!match) return;
           var barcode = match[1];
-          var price = prices[barcode];
-          if (!price) return;
+          var entry = prices[barcode];
+          if (!entry) return;
+          var current = typeof entry === 'object' ? entry.current : entry;
+          var original = typeof entry === 'object' ? entry.original : null;
+          if (!current) return;
           var namePrice = bottom.querySelector('.product-name-price');
           if (!namePrice) return;
           var existing = namePrice.querySelector('.wine-glovo-price');
-          if (existing) { existing.textContent = price; return; }
-          var el = document.createElement('div');
+          var el = existing || document.createElement('div');
           el.className = 'wine-glovo-price';
-          el.textContent = price;
-          namePrice.appendChild(el);
+          el.innerHTML = '<span class="wine-price-current">' + current + '</span>' +
+            (original ? '<span class="wine-price-original">' + original + '</span>' : '');
+          if (!existing) namePrice.appendChild(el);
         });
       })
       .catch(function() {});
