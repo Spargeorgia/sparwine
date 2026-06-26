@@ -3334,6 +3334,8 @@ ul, ol {
 
 .btn-text._02 {
   position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 .nav-menu-wrapper {
@@ -3434,6 +3436,7 @@ ul, ol {
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+  padding-top: 5px;
 }
 
 .btn-text-3._02 {
@@ -3457,6 +3460,7 @@ ul, ol {
   background-color: #000;
   border-radius: 100px;
   justify-content: center;
+  align-items: center;
   width: 100%;
   text-decoration: none;
   transition: all .2s;
@@ -3696,7 +3700,7 @@ ul, ol {
 .footer-inner {
   padding: var(--_space---space--space-8xl) var(--_space---space--space-6xl) var(--_space---space--space-6xl);
   border-radius: var(--_space---space--space-l);
-  background-color: var(--bg-colour);
+  background-color: #080c04;
   color: var(--white-colour);
 }
 
@@ -3757,7 +3761,7 @@ ul, ol {
 .submit-button-02 {
   padding: var(--_space---space--space-xs-plus) var(--_space---space--space-l);
   border-radius: var(--_space---space--space-xs);
-  background-color: var(--light-yellow);
+  background-color: #ffe592;
   font-family: var(--_typography---font-family--primary-font);
   color: var(--gray);
   font-size: var(--_typography---font-size--p-02-size);
@@ -3804,6 +3808,7 @@ ul, ol {
   grid-row-gap: var(--_space---space--space-m-plus);
   flex-flow: column;
   display: flex;
+  margin-top: -6%;
 }
 
 .footer-center {
@@ -3914,6 +3919,11 @@ ul, ol {
 
 .home-hero-btns .btn-02-link:where(.w-variant-8ed325c4-2932-a7c6-4370-0e1c5d9dff18),
 .wine-story-section .btn-02-link:where(.w-variant-8ed325c4-2932-a7c6-4370-0e1c5d9dff18) {
+  color: var(--white-colour);
+  background-color: #911628;
+}
+
+.cta .btn-02-link:where(.w-variant-8ed325c4-2932-a7c6-4370-0e1c5d9dff18) {
   color: var(--white-colour);
   background-color: #911628;
 }
@@ -4276,7 +4286,25 @@ ul, ol {
   text-decoration: none;
 }
 
+.delivery-icons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  z-index: 2;
+}
+
+.delivery-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: block;
+}
+
 .product-card-img {
+  position: relative;
   aspect-ratio: 1.09;
   border-radius: var(--_space---space--space-l);
   background-color: #f6f6f2;
@@ -4291,12 +4319,17 @@ ul, ol {
   padding-right: 8px;
 }
 
+.product-card-bottom .p-02.caps {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 .product-name-price {
   grid-column-gap: var(--_space---space--space-s);
   grid-row-gap: var(--_space---space--space-s);
   flex-flow: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 6px;
   display: flex;
 }
@@ -4377,7 +4410,16 @@ ul, ol {
 }
 
 .wine-product-title {
+  font-size: 15px;
+  line-height: 1.35;
   min-height: 2.5em;
+}
+
+.product-name-price .heading-07 {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 15px;
+  line-height: 1.35;
 }
 
 .wine-slider-btn {
@@ -4984,17 +5026,19 @@ ul, ol {
 
 .gallery-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .gallery-wrapper.green-bg {
-  padding-top: var(--_space---space--space-l);
-  padding-bottom: var(--_space---space--space-l);
-  background-color: var(--light-yellow);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #921929;
 }
 
 .gallery-card-wrap {
   flex: none;
   display: flex;
+  align-items: center;
 }
 
 .gallery-card {
@@ -5362,8 +5406,31 @@ ul, ol {
   display: flex;
 }
 
+.gallery-wrapper .heading-06 {
+  font-family: "TBC Contractica Caps", "TBC Contractica", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: #ffffff;
+  padding-top: 5px;
+}
+
+.slash-icon {
+  filter: brightness(0) saturate(100%) invert(93%) sepia(30%) saturate(500%) hue-rotate(340deg) brightness(105%);
+}
+
+.discount-icon-box {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+
 .discount-icon {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .contact-box-wrap {
@@ -5609,6 +5676,12 @@ ul, ol {
   padding-bottom: var(--_space---space--space-14xl);
 }
 
+.scroll-text-wrap .heading-06 {
+  font-family: "TBC Contractica Caps", "TBC Contractica", sans-serif;
+  font-weight: 400;
+  padding-top: 5px;
+}
+
 .scroll-text-wrap {
   grid-column-gap: 10px;
   grid-row-gap: 10px;
@@ -5723,20 +5796,26 @@ ul, ol {
 }
 
 .cta {
-  padding-top: var(--_space---space--space-14xl);
-  padding-bottom: var(--_space---space--space-14xl);
+  padding-top: 128px;
+  padding-bottom: 128px;
   border-radius: var(--_space---space--space-l);
   color: var(--white-colour);
   text-align: center;
-  background-image: url("../img/cta-01.avif");
-  background-position: 0 0;
-  background-size: auto;
+  background-image: linear-gradient(#00000073, #00000073), url("../img/wine-before-footer.png");
+  background-position: center;
+  background-size: cover;
   justify-content: center;
   width: 100%;
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
+}
+
+.cta .heading-01 {
+  font-size: 45px;
+  line-height: 1.2;
+  font-weight: 500;
 }
 
 .cta-inner {
@@ -5990,11 +6069,11 @@ ul, ol {
 
 @media screen and (max-width: 991px) {
   body {
-    --_typography---font-family--primary-font: Inter, sans-serif;
+    --_typography---font-family--primary-font: "TBC Contractica", Inter, sans-serif;
     --_typography---font-size--body-font-size: 14px;
     --_typography---font-height--body-font-height: 20px;
     --_typography---font-weight--weight-normal: 400;
-    --_typography---font-family--secondary-font: "Instrument Serif", sans-serif;
+    --_typography---font-family--secondary-font: "TBC Contractica Caps", "TBC Contractica", sans-serif;
     --_typography---font-size--heading-01-size: 58px;
     --_typography---font-height--heading-01-height: 65px;
     --_typography---font-size--heading-02-size: 42px;
@@ -6381,11 +6460,11 @@ ul, ol {
 
 @media screen and (max-width: 767px) {
   body {
-    --_typography---font-family--primary-font: Inter, sans-serif;
+    --_typography---font-family--primary-font: "TBC Contractica", Inter, sans-serif;
     --_typography---font-size--body-font-size: 14px;
     --_typography---font-height--body-font-height: 20px;
     --_typography---font-weight--weight-normal: 400;
-    --_typography---font-family--secondary-font: "Instrument Serif", sans-serif;
+    --_typography---font-family--secondary-font: "TBC Contractica Caps", "TBC Contractica", sans-serif;
     --_typography---font-size--heading-01-size: 45px;
     --_typography---font-height--heading-01-height: 52px;
     --_typography---font-size--heading-02-size: 36px;
@@ -6592,11 +6671,11 @@ ul, ol {
 
 @media screen and (max-width: 479px) {
   body {
-    --_typography---font-family--primary-font: Inter, sans-serif;
+    --_typography---font-family--primary-font: "TBC Contractica", Inter, sans-serif;
     --_typography---font-size--body-font-size: 14px;
     --_typography---font-height--body-font-height: 20px;
     --_typography---font-weight--weight-normal: 400;
-    --_typography---font-family--secondary-font: "Instrument Serif", sans-serif;
+    --_typography---font-family--secondary-font: "TBC Contractica Caps", "TBC Contractica", sans-serif;
     --_typography---font-size--heading-01-size: 38px;
     --_typography---font-height--heading-01-height: 45px;
     --_typography---font-size--heading-02-size: 30px;
@@ -6794,5 +6873,492 @@ ul, ol {
 @media screen and (max-width: 767px) {
   #w-node-eef4bc06-d65c-be98-ac1c-a99007517935-ca2d8dd3, #w-node-_38e4568e-fc3c-e089-a1f8-901ccc8060f4-ca2d8dd3 {
     grid-area: span 1 / span 2 / span 1 / span 2;
+  }
+}
+
+.products-page .header-navbar {
+  position: absolute;
+}
+
+.products-page .navbar {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.products-page .navbar-link.w--current {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.products-page #products {
+  padding-top: 15px;
+}
+
+.products-page .product-tabs-02 {
+  margin-top: var(--_space---space--space-l);
+}
+
+.products-hero {
+  padding-top: 160px;
+  padding-bottom: var(--_space---space--space-9xl);
+  color: var(--white-colour);
+  background-image: linear-gradient(#07180899, #071808b3), url("../img/wine.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.products-hero-container {
+  grid-column-gap: var(--_space---space--space-6xl);
+  grid-row-gap: var(--_space---space--space-3xl);
+  justify-content: space-between;
+  align-items: flex-end;
+  display: flex;
+}
+
+.products-hero-copy {
+  grid-column-gap: var(--_space---space--space-m);
+  grid-row-gap: var(--_space---space--space-m);
+  flex-flow: column;
+  align-items: flex-start;
+  display: flex;
+}
+
+.products-hero-right {
+  max-width: 360px;
+  color: #ffffffe6;
+}
+
+.products-page .product-tab-link-02 {
+  cursor: pointer;
+  font: inherit;
+}
+
+.products-page .product-tab-link-02.w--current {
+  background-color: var(--dark-green-colour);
+  border-color: var(--dark-green-colour);
+  color: var(--white-colour);
+}
+
+.products-page .product-card {
+  height: 100%;
+}
+
+.products-page .w-dyn-item[hidden] {
+  display: none !important;
+}
+
+.products-page .product-name-price {
+  align-items: flex-start;
+}
+
+.products-page .heading-07 {
+  white-space: nowrap;
+}
+
+.products-page .add-to-card-02 {
+  color: var(--white-colour);
+  background-color: #0e0f0cb3;
+  pointer-events: none;
+}
+
+.products-page .product-card-img:not(.has-swap) .add-to-card-02 {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.products-page .product-card-img:not(.has-swap):hover .add-to-card-02 {
+  opacity: 1;
+}
+
+.products-page .desktop-only {
+  display: flex;
+}
+
+@media screen and (max-width: 991px) {
+  .products-hero {
+    padding-top: 130px;
+  }
+
+  .products-hero-container {
+    align-items: flex-start;
+    flex-flow: column;
+  }
+
+  .products-page .desktop-only {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .products-hero {
+    padding-top: 120px;
+    padding-bottom: var(--_space---space--space-6xl);
+  }
+
+  .products-page .product-tab-menu-02 {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .products-page .product-tab-link-02 {
+    white-space: nowrap;
+  }
+}
+
+@font-face {
+  font-family: "TBC Contractica";
+  src: url("../fonts/TBCCONTRACTICA-REGULAR.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TBC Contractica";
+  src: url("../fonts/TBCCONTRACTICA-MEDIUM.TTF") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TBC Contractica";
+  src: url("../fonts/TBCCONTRACTICA-BOLD.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TBC Contractica Caps";
+  src: url("../fonts/TBCCONTRACTICACAPS-REGULAR.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TBC Contractica Caps";
+  src: url("../fonts/TBCCONTRACTICACAPS-MEDIUM.TTF") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TBC Contractica Caps";
+  src: url("../fonts/TBCCONTRACTICACAPS-BOLD.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --_typography---font-family--primary-font: "TBC Contractica", Inter, sans-serif;
+  --_typography---font-family--secondary-font: "TBC Contractica Caps", "TBC Contractica", sans-serif;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "TBC Contractica", Inter, sans-serif;
+}
+
+.heading-01,
+.heading-02,
+.heading-03,
+.navigation,
+.navbar-link,
+.cta-text,
+.product-tab-link-02,
+.caps {
+  font-family: "TBC Contractica Caps", "TBC Contractica", sans-serif;
+  letter-spacing: 0;
+}
+
+.language-switch {
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  background-color: #ffffffd9;
+  border: 1px solid #ffffff73;
+  border-radius: 999px;
+  align-items: center;
+  margin-right: 12px;
+  padding: 4px;
+  display: flex;
+  box-shadow: 0 10px 24px #0000001f;
+}
+
+.language-switch-btn {
+  color: var(--dark-green-colour);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  min-width: 36px;
+  height: 30px;
+  padding: 0 10px;
+  font-family: "TBC Contractica Caps", "TBC Contractica", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.language-switch-btn.is-active {
+  color: var(--white-colour);
+  background-color: var(--dark-green-colour);
+}
+
+@media screen and (max-width: 991px) {
+  .language-switch {
+    margin-left: auto;
+    margin-right: 12px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .language-switch {
+    padding: 3px;
+  }
+
+  .language-switch-btn {
+    min-width: 32px;
+    height: 28px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 11px;
+  }
+}
+
+.navbar-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1365px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--_space---space--container);
+  padding-right: var(--_space---space--container);
+}
+
+.home-hero .heading-01 {
+  font-family: "TBC Contractica Caps", "TBC Contractica", sans-serif;
+  font-size: 50px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: pre-line;
+}
+
+.products-page #products .header {
+  align-items: flex-start;
+}
+
+.products-page #products .heading-02 {
+  font-size: 40px;
+  line-height: 1.15;
+}
+
+.products-page #products .header-right {
+  max-width: 330px;
+  margin-left: auto;
+  text-align: right;
+}
+
+body:not(.products-page) #products .header {
+  align-items: flex-start;
+}
+
+body:not(.products-page) #products .heading-02 {
+  font-size: 40px;
+  line-height: 1.15;
+}
+
+body:not(.products-page) #products .header-right {
+  max-width: 330px;
+  margin-left: auto;
+  text-align: right;
+}
+
+body:not(.products-page) #products .header-right .p-01 {
+  display: block;
+  font-family: "TBC Contractica", Inter, sans-serif;
+  font-weight: 400;
+  white-space: pre-line;
+  line-height: 1.85;
+}
+
+.wine-story-section .content-text-inner > .heading-02 {
+  font-size: 27px;
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.wine-story-section .content-text-inner .p-01 {
+  font-family: "TBC Contractica", Inter, sans-serif;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 767px) {
+  .products-page #products .header-right {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  body:not(.products-page) #products .header-right {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wine-story-section .content-img-box.wine-feature-image {
+    aspect-ratio: 1.2 / 1;
+    display: flex;
+    width: 100%;
+    min-height: 260px;
+    max-width: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .wine-story-section .wine-feature-image > .wine-feature-bottle {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Age Gate Popup */
+.age-gate-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.age-gate-overlay.ag-hidden {
+  display: none;
+}
+
+.age-gate-card {
+  position: relative;
+  width: 680px;
+  max-width: 94vw;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.age-gate-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.age-gate-buttons-overlay {
+  position: absolute;
+  left: 77%;
+  top: 67%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.age-gate-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 11px;
+  overflow: hidden;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.age-gate-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.88;
+}
+
+.age-gate-btn img {
+  width: 63px;
+  display: block;
+}
+
+/* Mobile nav — always visible, no hamburger */
+@media screen and (max-width: 991px) {
+  .w-nav[data-collapse="medium"] .w-nav-menu {
+    display: flex !important;
+    position: static !important;
+    background: transparent !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .menu-button-2 {
+    display: none !important;
+  }
+
+  .nav-menu-two {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    gap: 10px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+
+  .nav-list-item {
+    width: auto !important;
+  }
+
+  .navbar-link {
+    padding: 4px 8px !important;
+    font-size: 13px !important;
+    color: #ffffff !important;
+  }
+
+  .navbar-link .p-01 {
+    color: #ffffff !important;
+  }
+
+  .nav-menu-wrapper {
+    margin-top: 0 !important;
+  }
+
+  .nav-menu-two {
+    margin-top: 60px !important;
+    padding-top: 0 !important;
+  }
+
+  .btn-text._02 {
+    display: none !important;
+  }
+
+  .responsive-show {
+    display: none !important;
+  }
+
+  .language-switch {
+    margin-right: 2px !important;
+  }
+
+  .nav-logo.spirits-logo {
+    margin-left: 1px !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-brand {
+    margin-left: 4px !important;
   }
 }
