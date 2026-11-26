@@ -1,0 +1,14 @@
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  <Files "prices.json">
+    Header set Cache-Control "no-store"
+  </Files>
+</IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(?:[.]git(?:/|$)|[.]github(?:/|$)|scripts(?:/|$)|README[.]md$|[.]gitignore$) - [F,L,NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+</IfModule>
