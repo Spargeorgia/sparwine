@@ -4,7 +4,6 @@ declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, max-age=0');
 header('X-Content-Type-Options: nosniff');
-header('X-Robots-Tag: noindex, nofollow');
 $ids = ['8410261112121','8410261112008','8410261101071','8410261101118','9100300200467','3222477739123','8015920372498','9100300001170'];
 function checkedFeed(string $file, array $ids, bool $requireLive): ?array {
     if (!is_readable($file) || filesize($file) > 16384) { return null; }
