@@ -1,5 +1,4 @@
 <IfModule mod_headers.c>
-  Header always set X-Robots-Tag "noindex, nofollow"
   <Files "prices.json">
     Header set Cache-Control "no-store"
   </Files>
