@@ -1,14 +1,110 @@
 {
   "prices": {
-    "8410261112121": { "current": "14,95₾", "original": "29,95₾" },
-    "8410261112008": { "current": "29,95₾" },
-    "8410261101071": { "current": "9,95₾", "original": "19,95₾" },
-    "8410261101118": { "current": "19,95₾" },
-    "9100300200467": { "current": "24,95₾" },
-    "3222477739123": { "current": "29,95₾" },
-    "8015920372498": { "current": "39,95₾" },
-    "9100300001170": { "current": "24,95₾" }
+    "8410261112121": {
+      "current": "29,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-67b70f60612d80394c29deee",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018617207593&externalProductId=2272614",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 6,
+        "glovo": true
+      }
+    },
+    "8410261112008": {
+      "current": "17,95₾",
+      "original": "29,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-2c98d5319213d11405aacec5",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018617207560&externalProductId=2272615",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 6,
+        "glovo": true
+      }
+    },
+    "8410261101071": {
+      "current": "19,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-ad032eeb3fabf3e9af5ecf81",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018617208582&externalProductId=2272616",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 4,
+        "glovo": true
+      }
+    },
+    "8410261101118": {
+      "current": "12,95₾",
+      "original": "19,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-28a47e373530c070bb7232f4",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018617207571&externalProductId=2272617",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 5,
+        "glovo": true
+      }
+    },
+    "9100300200467": {
+      "current": "14,95₾",
+      "original": "24,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-bfc61ae8b1521b5c38373272",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018630948686&externalProductId=2273788",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 6,
+        "glovo": true
+      }
+    },
+    "3222477739123": {
+      "current": "29,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-88ab92a221a7a8b95b8d4b88",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018630948696&externalProductId=2273789",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 6,
+        "glovo": true
+      }
+    },
+    "8015920372498": {
+      "current": "39,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-0afc6e2281057fbaa93280cc",
+      "glovoUrl": "https://glovoapp.com/ka/ge/tbilisi/stores/spar-tbi?content=ghvino-shushkhuna-ghvino-c.46082864&section=utskhouri-ghvino-s.56850095&productId=4611686018630948668&externalProductId=2273790",
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 6,
+        "glovo": true
+      }
+    },
+    "9100300001170": {
+      "current": "24,95₾",
+      "woltUrl": "https://wolt.com/ka/geo/tbilisi/venue/spar-saburtalo/itemid-da928f8342a5e2316681cc80",
+      "glovoUrl": null,
+      "inStock": true,
+      "verifiedAt": "2026-11-26T13:39:19.653Z",
+      "availableAt": {
+        "woltStores": 6,
+        "glovo": false
+      }
+    }
   },
-  "updatedAt": "2026-06-26T08:08:18.294Z",
-  "stats": { "updated": 8, "failed": 0, "total": 8 }
+  "updatedAt": "2026-11-26T13:40:53.974Z",
+  "checked": {
+    "woltStores": 6,
+    "woltStoresListed": 6,
+    "glovo": true
+  },
+  "stats": {
+    "verified": 8,
+    "inStock": 8,
+    "soldOutEverywhere": 0,
+    "total": 8
+  },
+  "disagreements": [
+    "Il Barone Dry Red Wine: 14,95₾ (was 24,95₾) at 6 Wolt stores; 24,95₾ at Glovo"
+  ]
 }
